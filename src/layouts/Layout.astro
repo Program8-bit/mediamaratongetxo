@@ -45,20 +45,18 @@ const patrocinadores = (await getCollection('patrocinadores')).sort(
   </head>
   <body>
     <header style="background: var(--color-primary); color: #fff;">
-      <div class="container" style="display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding-top: 1.25rem; padding-bottom: 1.25rem; gap: 1rem;">
-        <span></span>
-        <nav>
-          <ul style="list-style: none; display: flex; flex-wrap: wrap; justify-content: center; gap: 1.25rem; margin: 0; padding: 0;">
+      <div class="container site-header-inner">
+        <span class="site-header-spacer"></span>
+        <nav class="site-nav">
+          <ul>
             {nav.map((item) => (
               <li>
-                <a href={item.href} style="color: #fff; text-decoration: none; font-size: 1.15rem; font-weight: 400;">
-                  {item.label}
-                </a>
+                <a href={item.href}>{item.label}</a>
               </li>
             ))}
           </ul>
         </nav>
-        <a class="btn" href={settings.enlaceInscripcion} target="_blank" rel="noopener" style="justify-self: end; font-size: 1.1rem;">
+        <a class="btn site-cta" href={settings.enlaceInscripcion} target="_blank" rel="noopener">
           Inscríbete
         </a>
       </div>
