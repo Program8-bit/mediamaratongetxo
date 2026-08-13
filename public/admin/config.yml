@@ -1,0 +1,139 @@
+# Backend: usa Netlify Identity + Git Gateway (recomendado si se aloja en Netlify).
+# Si se despliega en otro sitio, cambia esta sección por un backend "github" con OAuth.
+backend:
+  name: git-gateway
+  branch: main
+
+# Permite editar en local sin autenticarse: `npx decap-server` + `npm run dev`
+local_backend: true
+
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
+
+locale: "es"
+
+collections:
+  - name: "settings"
+    label: "Configuración general"
+    files:
+      - name: "settings"
+        label: "Datos del evento"
+        file: "src/content/settings/settings.yaml"
+        fields:
+          - { label: "Nombre del evento", name: "nombreEvento", widget: "string" }
+          - { label: "Fecha", name: "fecha", widget: "string" }
+          - { label: "Lugar de salida", name: "lugarSalida", widget: "string" }
+          - { label: "Hora de salida", name: "horaSalida", widget: "string" }
+          - { label: "Subtítulo (portada)", name: "subtitulo", widget: "text" }
+          - { label: "Enlace a inscripciones", name: "enlaceInscripcion", widget: "string" }
+
+  - name: "carrera"
+    label: "La carrera"
+    files:
+      - name: "carrera"
+        label: "Información de la carrera"
+        file: "src/content/carrera/carrera.yaml"
+        fields:
+          - { label: "Distancia", name: "distancia", widget: "string" }
+          - { label: "Recorrido", name: "recorrido", widget: "text" }
+          - { label: "Altimetría", name: "altimetria", widget: "text" }
+          - { label: "Horarios", name: "horarios", widget: "text" }
+          - { label: "Categorías", name: "categorias", widget: "text" }
+          - { label: "Enlace al mapa del recorrido", name: "mapaUrl", widget: "string", required: false }
+
+  - name: "dorsales"
+    label: "Recogida de dorsales"
+    files:
+      - name: "dorsales"
+        label: "Recogida de dorsales"
+        file: "src/content/dorsales/dorsales.yaml"
+        fields:
+          - { label: "Lugar", name: "lugar", widget: "string" }
+          - { label: "Fecha", name: "fecha", widget: "string" }
+          - { label: "Horario", name: "horario", widget: "string" }
+          - { label: "Qué llevar", name: "queLlevar", widget: "text" }
+
+  - name: "resultados"
+    label: "Resultados"
+    files:
+      - name: "resultados"
+        label: "Ediciones anteriores"
+        file: "src/content/resultados/resultados.yaml"
+        fields:
+          - label: "Ediciones pasadas"
+            name: "edicionesPasadas"
+            widget: "list"
+            fields:
+              - { label: "Año", name: "anio", widget: "string" }
+              - { label: "Enlace a la clasificación", name: "enlace", widget: "string" }
+
+  - name: "contacto"
+    label: "Contacto"
+    files:
+      - name: "contacto"
+        label: "Datos de contacto"
+        file: "src/content/contacto/contacto.yaml"
+        fields:
+          - { label: "Email", name: "email", widget: "string" }
+          - { label: "Teléfono", name: "telefono", widget: "string" }
+          - { label: "Dirección", name: "direccion", widget: "string" }
+          - { label: "Instagram", name: "instagram", widget: "string", required: false }
+          - { label: "Facebook", name: "facebook", widget: "string", required: false }
+
+  - name: "patrocinadores"
+    label: "Patrocinadores"
+    folder: "src/content/patrocinadores"
+    create: true
+    slug: "{{slug}}"
+    identifier_field: "nombre"
+    extension: "yaml"
+    fields:
+      - { label: "Nombre", name: "nombre", widget: "string" }
+      - { label: "Logo", name: "logo", widget: "image" }
+      - { label: "Enlace", name: "url", widget: "string", required: false }
+      - label: "Nivel"
+        name: "nivel"
+        widget: "select"
+        options: ["oro", "plata", "bronce", "colaborador"]
+
+  - name: "faq"
+    label: "Preguntas frecuentes"
+    folder: "src/content/faq"
+    create: true
+    slug: "{{slug}}"
+    identifier_field: "pregunta"
+    extension: "yaml"
+    fields:
+      - { label: "Pregunta", name: "pregunta", widget: "string" }
+      - { label: "Respuesta", name: "respuesta", widget: "text" }
+      - { label: "Orden", name: "orden", widget: "number", default: 0 }
+
+  - name: "galeria"
+    label: "Galería"
+    folder: "src/content/galeria"
+    create: true
+    slug: "{{slug}}"
+    identifier_field: "alt"
+    extension: "yaml"
+    fields:
+      - { label: "Imagen", name: "imagen", widget: "image" }
+      - { label: "Texto alternativo", name: "alt", widget: "string" }
+      - { label: "Año", name: "anio", widget: "string" }
+
+  - name: "reglamento"
+    label: "Reglamento"
+    folder: "src/content/reglamento"
+    create: false
+    slug: "{{slug}}"
+    fields:
+      - { label: "Título", name: "titulo", widget: "string" }
+      - { label: "Contenido", name: "body", widget: "markdown" }
+
+  - name: "legal"
+    label: "Aviso legal"
+    folder: "src/content/legal"
+    create: false
+    slug: "{{slug}}"
+    fields:
+      - { label: "Título", name: "titulo", widget: "string" }
+      - { label: "Contenido", name: "body", widget: "markdown" }

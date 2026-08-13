@@ -1,0 +1,100 @@
+---
+import '../styles/global.css';
+import { getSettings } from '../lib/site-data';
+import { getCollection } from 'astro:content';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = 'Media Maratón de Getxo — 21,097 km por todos los barrios de Getxo.' } = Astro.props;
+const settings = getSettings();
+
+const nav = [
+  { href: '/', label: 'Inicio' },
+  { href: '/carrera', label: 'La carrera' },
+  { href: '/resultados', label: 'Resultados' },
+  { href: '/dorsales', label: 'Recogida de dorsales' },
+  { href: '/galeria', label: 'Galería' },
+  { href: '/faq', label: 'FAQ' },
+  { href: '/reglamento', label: 'Reglamento' },
+  { href: '/contacto', label: 'Contacto' },
+];
+
+const orden = { oro: 0, plata: 1, bronce: 2, colaborador: 3 };
+const patrocinadores = (await getCollection('patrocinadores')).sort(
+  (a, b) => orden[a.data.nivel] - orden[b.data.nivel]
+);
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <title>{title} · {settings.nombreEvento}</title>
+    <meta name="description" content={description} />
+  </head>
+  <body>
+    <header style="background: var(--color-primary); color: #fff;">
+      <div class="container" style="display: flex; flex-direction: column; align-items: center; padding-top: 1.25rem; padding-bottom: 1.25rem; gap: 0.85rem;">
+        <a href="/" style="color: #fff; text-decoration: none; font-weight: 700; font-size: 1.3rem;">
+          {settings.nombreEvento}
+        </a>
+        <div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 1.5rem;">
+          <nav>
+            <ul style="list-style: none; display: flex; flex-wrap: wrap; justify-content: center; gap: 1.25rem; margin: 0; padding: 0;">
+              {nav.map((item) => (
+                <li>
+                  <a href={item.href} style="color: #fff; text-decoration: none; font-size: 0.95rem;">
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <a class="btn" href={settings.enlaceInscripcion} target="_blank" rel="noopener">
+            Inscríbete
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer style="background: var(--color-primary-dark); color: #fff; margin-top: 3rem;">
+      {patrocinadores.length > 0 && (
+        <div class="container" style="padding-top: 2rem; text-align: center;">
+          <p style="margin: 0 0 1rem; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.85rem; color: #c9d3db;">
+            Patrocinadores y colaboradores
+          </p>
+          <div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 1.25rem;">
+            {patrocinadores.map((p) => {
+              const Wrapper = p.data.url ? 'a' : 'div';
+              return (
+                <Wrapper
+                  href={p.data.url}
+                  target={p.data.url ? '_blank' : undefined}
+                  rel={p.data.url ? 'noopener' : undefined}
+                  style="background: #fff; border-radius: var(--radius); padding: 0.6rem 1rem; display: inline-flex; align-items: center;"
+                >
+                  <img src={p.data.logo} alt={p.data.nombre} style="max-height: 40px; max-width: 120px;" />
+                </Wrapper>
+              );
+            })}
+          </div>
+        </div>
+      )}
+      <div class="container" style="padding-top: 2rem; padding-bottom: 1.5rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+        <p style="margin: 0; color: #c9d3db;">
+          Web desarrollada por <a href="https://belvedere.eus" target="_blank" rel="noopener" style="color: #fff;">Belvedere Agency</a>
+        </p>
+        <a href="/legal" style="color: #fff;">Aviso legal y privacidad</a>
+      </div>
+    </footer>
+  </body>
+</html>

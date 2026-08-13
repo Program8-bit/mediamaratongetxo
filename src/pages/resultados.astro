@@ -1,0 +1,24 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getResultados } from '../lib/site-data';
+
+const resultados = getResultados();
+---
+
+<Layout title="Resultados">
+  <section class="section">
+    <div class="container">
+      <h1>Resultados</h1>
+      <p>Clasificaciones de ediciones anteriores de la Media Maratón de Getxo.</p>
+      <ul>
+        {resultados.edicionesPasadas.map((edicion) => (
+          <li>
+            <a href={edicion.enlace} target="_blank" rel="noopener">
+              Edición {edicion.anio} →
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</Layout>

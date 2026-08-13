@@ -1,0 +1,21 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const faqs = await getCollection('faq');
+const ordenadas = [...faqs].sort((a, b) => a.data.orden - b.data.orden);
+---
+
+<Layout title="Preguntas frecuentes">
+  <section class="section">
+    <div class="container">
+      <h1>Preguntas frecuentes</h1>
+      {ordenadas.map((item) => (
+        <div class="card" style="margin-bottom: 1rem;">
+          <h3 style="margin-top: 0;">{item.data.pregunta}</h3>
+          <p style="margin-bottom: 0;">{item.data.respuesta}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+</Layout>

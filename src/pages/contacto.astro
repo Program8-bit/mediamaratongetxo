@@ -1,0 +1,25 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getContacto } from '../lib/site-data';
+
+const contacto = getContacto();
+---
+
+<Layout title="Contacto">
+  <section class="section">
+    <div class="container">
+      <h1>Contacto</h1>
+      <div class="card">
+        <p><strong>Email:</strong> <a href={`mailto:${contacto.email}`}>{contacto.email}</a></p>
+        <p><strong>Teléfono:</strong> {contacto.telefono}</p>
+        <p><strong>Dirección:</strong> {contacto.direccion}</p>
+        {contacto.instagram && (
+          <p><a href={contacto.instagram} target="_blank" rel="noopener">Instagram</a></p>
+        )}
+        {contacto.facebook && (
+          <p><a href={contacto.facebook} target="_blank" rel="noopener">Facebook</a></p>
+        )}
+      </div>
+    </div>
+  </section>
+</Layout>

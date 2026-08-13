@@ -1,0 +1,39 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getSettings } from '../lib/site-data';
+
+const settings = getSettings();
+---
+
+<Layout title="Inicio">
+  <section style="background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark)); color: #fff;">
+    <div class="container" style="padding: 4rem 1.25rem; text-align: center;">
+      <h1 style="color: #fff; font-size: 2.5rem; margin-bottom: 0.5rem;">{settings.nombreEvento}</h1>
+      <p style="font-size: 1.25rem; margin-bottom: 1.5rem;">{settings.subtitulo}</p>
+      <p style="font-size: 1.1rem; margin: 0;">
+        📅 {settings.fecha} · 📍 {settings.lugarSalida} · 🕒 {settings.horaSalida}
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem;">
+      <a href="/carrera" class="card" style="text-decoration: none;">
+        <h3>La carrera</h3>
+        <p style="color: var(--color-text-muted); margin: 0;">Recorrido, altimetría, horarios y categorías.</p>
+      </a>
+      <a href="/dorsales" class="card" style="text-decoration: none;">
+        <h3>Recogida de dorsales</h3>
+        <p style="color: var(--color-text-muted); margin: 0;">Dónde, cuándo y qué llevar.</p>
+      </a>
+      <a href="/resultados" class="card" style="text-decoration: none;">
+        <h3>Resultados</h3>
+        <p style="color: var(--color-text-muted); margin: 0;">Clasificaciones de ediciones anteriores.</p>
+      </a>
+      <a href="/faq" class="card" style="text-decoration: none;">
+        <h3>Preguntas frecuentes</h3>
+        <p style="color: var(--color-text-muted); margin: 0;">Aparcamiento, plazas y más dudas habituales.</p>
+      </a>
+    </div>
+  </section>
+</Layout>

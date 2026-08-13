@@ -1,0 +1,21 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getDorsales } from '../lib/site-data';
+
+const dorsales = getDorsales();
+---
+
+<Layout title="Recogida de dorsales">
+  <section class="section">
+    <div class="container">
+      <h1>Recogida de dorsales</h1>
+      <div class="card">
+        <p><strong>Lugar:</strong> {dorsales.lugar}</p>
+        <p><strong>Fecha:</strong> {dorsales.fecha}</p>
+        <p><strong>Horario:</strong> {dorsales.horario}</p>
+      </div>
+      <h2>Qué llevar</h2>
+      <p style="white-space: pre-line;">{dorsales.queLlevar}</p>
+    </div>
+  </section>
+</Layout>
