@@ -1,0 +1,20 @@
+{
+  "name": "media-maraton-getxo",
+  "type": "module",
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "cms": "decap-server"
+  },
+  "dependencies": {
+    "astro": "^7.2.1",
+    "yaml": "^2.6.0"
+  },
+  "devDependencies": {
+    "decap-server": "^3.2.0"
+  }
+}
