@@ -14,6 +14,8 @@ export interface Settings {
   horaSalida: string;
   subtitulo: string;
   enlaceInscripcion: string;
+  colorPrimario?: string;
+  colorAcento?: string;
 }
 
 export interface Carrera {

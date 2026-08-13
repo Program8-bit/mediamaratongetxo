@@ -29,7 +29,7 @@ const patrocinadores = (await getCollection('patrocinadores')).sort(
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang="es" style={`--color-primary: ${settings.colorPrimario || '#0b3d5c'}; --color-accent: ${settings.colorAcento || '#d62828'};`}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />

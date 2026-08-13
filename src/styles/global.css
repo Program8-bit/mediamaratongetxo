@@ -1,12 +1,12 @@
 :root {
-  /* Azul marino: mar y costa de Getxo */
+  /* Valores por defecto: se sobrescriben desde /admin (Configuración general) */
   --color-primary: #0b3d5c;
-  --color-primary-dark: #082c42;
-  --color-primary-light: #4d7ea8;
-
-  /* Rojo: escudo/bandera de Bizkaia */
   --color-accent: #d62828;
-  --color-accent-dark: #a91d1d;
+
+  /* Tonos derivados automáticamente de los dos de arriba */
+  --color-primary-dark: color-mix(in srgb, var(--color-primary) 80%, black);
+  --color-primary-light: color-mix(in srgb, var(--color-primary) 55%, white);
+  --color-accent-dark: color-mix(in srgb, var(--color-accent) 80%, black);
 
   --color-bg: #ffffff;
   --color-bg-alt: #f4f7fa;

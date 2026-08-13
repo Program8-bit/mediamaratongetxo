@@ -26,6 +26,8 @@ collections:
           - { label: "Hora de salida", name: "horaSalida", widget: "string" }
           - { label: "Subtítulo (portada)", name: "subtitulo", widget: "text" }
           - { label: "Enlace a inscripciones", name: "enlaceInscripcion", widget: "string" }
+          - { label: "Color principal", name: "colorPrimario", widget: "color", default: "#0b3d5c" }
+          - { label: "Color de acento", name: "colorAcento", widget: "color", default: "#d62828" }
 
   - name: "carrera"
     label: "La carrera"
