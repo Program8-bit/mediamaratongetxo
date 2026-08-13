@@ -31,6 +31,7 @@ export interface Dorsales {
   lugar: string;
   fecha: string;
   horario: string;
+  aviso?: string;
   queLlevar: string;
 }
 

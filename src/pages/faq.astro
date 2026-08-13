@@ -4,16 +4,33 @@ import { getCollection } from 'astro:content';
 
 const faqs = await getCollection('faq');
 const ordenadas = [...faqs].sort((a, b) => a.data.orden - b.data.orden);
+
+function linkify(texto: string) {
+  const escapado = texto
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+  return escapado.replace(
+    /(https?:\/\/[^\s]+)/g,
+    (url) => `<a href="${url}" target="_blank" rel="noopener">${url}</a>`,
+  );
+}
 ---
 
 <Layout title="Preguntas frecuentes">
   <section class="section">
     <div class="container">
-      <h1>Preguntas frecuentes</h1>
+      <p style="text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-text-muted); margin-bottom: 0.25rem;">
+        Información
+      </p>
+      <h1 style="margin-top: 0;">Preguntas frecuentes</h1>
+      <p style="color: var(--color-text-muted); margin-top: -0.5rem; margin-bottom: 2rem;">
+        IV OTSO Media Maratón Getxo · OTSO Getxoko Maratoi Erdia
+      </p>
       {ordenadas.map((item) => (
         <div class="card" style="margin-bottom: 1rem;">
           <h3 style="margin-top: 0;">{item.data.pregunta}</h3>
-          <p style="margin-bottom: 0;">{item.data.respuesta}</p>
+          <p style="margin-bottom: 0; white-space: pre-line;" set:html={linkify(item.data.respuesta)} />
         </div>
       ))}
     </div>
