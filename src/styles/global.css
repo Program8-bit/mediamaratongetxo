@@ -338,6 +338,30 @@ a.card:hover,
   color: color-mix(in srgb, var(--color-accent) 70%, white);
 }
 
+.site-nav a.lang-switch {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 999px;
+  padding: 0.3rem 0.8rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.site-nav a.lang-switch:hover {
+  border-color: #fff;
+  color: #fff;
+}
+
+@media (max-width: 860px) {
+  .site-nav a.lang-switch {
+    display: inline-block;
+    border-radius: 0;
+    border: none;
+    padding: 0.85rem 1.5rem;
+  }
+}
+
 @media (max-width: 860px) {
   .nav-toggle {
     display: flex;

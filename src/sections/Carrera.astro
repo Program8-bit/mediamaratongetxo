@@ -1,0 +1,53 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCarrera } from '../lib/site-data';
+import { t, type Lang } from '../lib/i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const strings = t[lang].carrera;
+const carrera = getCarrera();
+const eu = lang === 'eu';
+---
+
+<Layout title={strings.tituloLineas.join(' ')} lang={lang}>
+  <section class="page-hero">
+    <div class="container">
+      <h1 class="page-hero-title">
+        {strings.tituloLineas.map((linea) => <span>{linea}</span>)}
+      </h1>
+      <p class="page-hero-subtitle">
+        {strings.distancia}: {(eu && carrera.distanciaEu) || carrera.distancia}
+      </p>
+    </div>
+  </section>
+
+  <section class="page-section section">
+    <div class="container">
+      <div class="info-grid">
+        <div class="info-card">
+          <h2>{strings.recorrido}</h2>
+          <p style="white-space: pre-line;">{(eu && carrera.recorridoEu) || carrera.recorrido}</p>
+          {carrera.mapaUrl && (
+            <p><a href={carrera.mapaUrl} target="_blank" rel="noopener">{strings.verMapa}</a></p>
+          )}
+        </div>
+        <div class="info-card">
+          <h2>{strings.altimetria}</h2>
+          <p style="white-space: pre-line;">{(eu && carrera.altimetriaEu) || carrera.altimetria}</p>
+        </div>
+        <div class="info-card">
+          <h2>{strings.horarios}</h2>
+          <p style="white-space: pre-line;">{(eu && carrera.horariosEu) || carrera.horarios}</p>
+        </div>
+        <div class="info-card">
+          <h2>{strings.categorias}</h2>
+          <p style="white-space: pre-line;">{(eu && carrera.categoriasEu) || carrera.categorias}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

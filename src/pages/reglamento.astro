@@ -1,16 +1,5 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import { getCollection, render } from 'astro:content';
-
-const [reglamento] = await getCollection('reglamento');
-const { Content } = await render(reglamento);
+import Reglamento from '../sections/Reglamento.astro';
 ---
 
-<Layout title="Reglamento">
-  <section class="section">
-    <div class="container">
-      <h1>{reglamento.data.titulo}</h1>
-      <Content />
-    </div>
-  </section>
-</Layout>
+<Reglamento lang="es" />

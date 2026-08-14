@@ -9,11 +9,15 @@ function readYaml<T>(relativePath: string): T {
 
 export interface Settings {
   nombreEvento: string;
+  nombreEventoEu?: string;
   fecha: string;
+  fechaEu?: string;
   lugarSalida: string;
   horaSalida: string;
   subtitulo: string;
+  subtituloEu?: string;
   enlaceInscripcion: string;
+  enlaceInscripcionEu?: string;
   fechaHoraISO?: string;
   fotoHero?: string;
   videoHeroUrl?: string;
@@ -23,19 +27,29 @@ export interface Settings {
 
 export interface Carrera {
   distancia: string;
+  distanciaEu?: string;
   recorrido: string;
+  recorridoEu?: string;
   altimetria: string;
+  altimetriaEu?: string;
   horarios: string;
+  horariosEu?: string;
   categorias: string;
+  categoriasEu?: string;
   mapaUrl?: string;
 }
 
 export interface Dorsales {
   lugar: string;
+  lugarEu?: string;
   fecha: string;
+  fechaEu?: string;
   horario: string;
+  horarioEu?: string;
   aviso?: string;
+  avisoEu?: string;
   queLlevar: string;
+  queLlevarEu?: string;
 }
 
 export interface Resultados {

@@ -16,6 +16,8 @@ const faq = defineCollection({
   schema: z.object({
     pregunta: z.string(),
     respuesta: z.string(),
+    preguntaEu: z.string().optional(),
+    respuestaEu: z.string().optional(),
     orden: z.number().default(0),
   }),
 });
@@ -24,6 +26,7 @@ const reglamento = defineCollection({
   loader: glob({ pattern: '**/*.md', base: 'src/content/reglamento' }),
   schema: z.object({
     titulo: z.string(),
+    lang: z.enum(['es', 'eu']).default('es'),
   }),
 });
 
@@ -31,6 +34,7 @@ const legal = defineCollection({
   loader: glob({ pattern: '**/*.md', base: 'src/content/legal' }),
   schema: z.object({
     titulo: z.string(),
+    lang: z.enum(['es', 'eu']).default('es'),
   }),
 });
 

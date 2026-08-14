@@ -1,0 +1,31 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getResultados } from '../lib/site-data';
+import { t, type Lang } from '../lib/i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const strings = t[lang].resultados;
+const resultados = getResultados();
+---
+
+<Layout title={strings.titulo} lang={lang}>
+  <section class="section">
+    <div class="container">
+      <h1>{strings.titulo}</h1>
+      <p>{strings.intro}</p>
+      <ul>
+        {resultados.edicionesPasadas.map((edicion) => (
+          <li>
+            <a href={edicion.enlace} target="_blank" rel="noopener">
+              {strings.edicion} {edicion.anio} →
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</Layout>

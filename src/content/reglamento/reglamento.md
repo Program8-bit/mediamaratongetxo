@@ -1,5 +1,6 @@
 ---
 titulo: Reglamento
+lang: es
 ---
 
 ## Normativa general

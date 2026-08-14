@@ -1,16 +1,5 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import { getCollection, render } from 'astro:content';
-
-const [legal] = await getCollection('legal');
-const { Content } = await render(legal);
+import Legal from '../sections/Legal.astro';
 ---
 
-<Layout title="Aviso legal">
-  <section class="section">
-    <div class="container">
-      <h1>{legal.data.titulo}</h1>
-      <Content />
-    </div>
-  </section>
-</Layout>
+<Legal lang="es" />

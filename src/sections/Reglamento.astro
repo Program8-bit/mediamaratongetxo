@@ -1,0 +1,23 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection, render } from 'astro:content';
+import type { Lang } from '../lib/i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const entradas = await getCollection('reglamento');
+const reglamento = entradas.find((e) => e.data.lang === lang) ?? entradas.find((e) => e.data.lang === 'es');
+const { Content } = await render(reglamento!);
+---
+
+<Layout title={reglamento!.data.titulo} lang={lang}>
+  <section class="section">
+    <div class="container">
+      <h1>{reglamento!.data.titulo}</h1>
+      <Content />
+    </div>
+  </section>
+</Layout>

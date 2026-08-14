@@ -1,13 +1,26 @@
 lugar: Ciudad Deportiva de Fadura, Getxo (Bizkaia)
+lugarEu: Fadurako Kiroldegia, Getxo (Bizkaia)
 fecha: Viernes, sábado y domingo de la semana de la prueba
+fechaEu: Probaren asteko ostirala, larunbata eta igandea
 horario: |
   Viernes: 18:00–20:30h
   Sábado: 09:00–14:00h
   Domingo: de 8:00h a 30 min antes de la salida correspondiente
+horarioEu: |
+  Ostirala: 18:00–20:30
+  Larunbata: 09:00–14:00
+  Igandea: 8:00etatik dagokion irteera baino 30 minutu lehenagora arte
 aviso: |
   Importante: no se entregarán los dorsales fuera de esos horarios y en ciertos momentos se pueden originar colas... ¡sed precavidos!
 
   La utilización del dorsal y el chip será obligatoria.
+avisoEu: |
+  Garrantzitsua: dortsalak ez dira aipatutako ordutegietatik kanpo emango, eta uneren batean ilarak sor daitezke... kontuz ibili!
+
+  Dortsala eta txipa erabiltzea nahitaezkoa izango da.
 queLlevar: |
   DNI/pasaporte y justificante de inscripción (impreso o en el móvil).
   Si recoges el dorsal de otra persona, necesitarás también una fotocopia de su DNI.
+queLlevarEu: |
+  NAN/pasaportea eta izen-emate egiaztagiria (paperean edo mugikorrean).
+  Beste pertsona baten dortsala jasotzen baduzu, haren NANaren fotokopia bat ere beharko duzu.

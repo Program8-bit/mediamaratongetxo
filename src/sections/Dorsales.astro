@@ -1,0 +1,46 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getDorsales } from '../lib/site-data';
+import { t, type Lang } from '../lib/i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const strings = t[lang].dorsales;
+const dorsales = getDorsales();
+const eu = lang === 'eu';
+const lugar = (eu && dorsales.lugarEu) || dorsales.lugar;
+---
+
+<Layout title={strings.tituloLineas.join(' ')} lang={lang}>
+  <section class="page-hero">
+    <div class="container">
+      <h1 class="page-hero-title">
+        {strings.tituloLineas.map((linea) => <span>{linea}</span>)}
+      </h1>
+      <p class="page-hero-subtitle">{lugar}</p>
+    </div>
+  </section>
+
+  <section class="page-section section">
+    <div class="container">
+      <div class="info-grid">
+        <div class="info-card">
+          <h2>{strings.cuandoDonde}</h2>
+          <p><strong>{strings.lugar}:</strong> {lugar}</p>
+          <p><strong>{strings.fecha}:</strong> {(eu && dorsales.fechaEu) || dorsales.fecha}</p>
+          <p style="white-space: pre-line;"><strong>{strings.horario}:</strong>{'\n'}{(eu && dorsales.horarioEu) || dorsales.horario}</p>
+          {dorsales.aviso && (
+            <p style="color: var(--color-text-muted); white-space: pre-line;">{(eu && dorsales.avisoEu) || dorsales.aviso}</p>
+          )}
+        </div>
+        <div class="info-card">
+          <h2>{strings.queLlevar}</h2>
+          <p style="white-space: pre-line;">{(eu && dorsales.queLlevarEu) || dorsales.queLlevar}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

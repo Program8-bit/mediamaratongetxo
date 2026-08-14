@@ -1,0 +1,32 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getContacto } from '../lib/site-data';
+import { t, type Lang } from '../lib/i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const strings = t[lang].contacto;
+const contacto = getContacto();
+---
+
+<Layout title={strings.titulo} lang={lang}>
+  <section class="section">
+    <div class="container">
+      <h1>{strings.titulo}</h1>
+      <div class="card">
+        <p><strong>{strings.email}:</strong> <a href={`mailto:${contacto.email}`}>{contacto.email}</a></p>
+        <p><strong>{strings.telefono}:</strong> {contacto.telefono}</p>
+        <p><strong>{strings.direccion}:</strong> {contacto.direccion}</p>
+        {contacto.instagram && (
+          <p><a href={contacto.instagram} target="_blank" rel="noopener">Instagram</a></p>
+        )}
+        {contacto.facebook && (
+          <p><a href={contacto.facebook} target="_blank" rel="noopener">Facebook</a></p>
+        )}
+      </div>
+    </div>
+  </section>
+</Layout>

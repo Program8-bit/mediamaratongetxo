@@ -1,5 +1,6 @@
 ---
 titulo: Aviso legal y privacidad
+lang: es
 ---
 
 ## Responsable del tratamiento

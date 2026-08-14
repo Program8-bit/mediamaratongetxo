@@ -2,26 +2,31 @@
 import '../styles/global.css';
 import { getSettings, getContacto } from '../lib/site-data';
 import { getCollection } from 'astro:content';
+import { t, pathWithLang, type Lang } from '../lib/i18n';
 
 interface Props {
   title: string;
   description?: string;
   noFooterGap?: boolean;
+  lang?: Lang;
 }
 
-const {
-  title,
-  description = 'Media Maratón de Getxo — 21,097 km por todos los barrios de Getxo.',
-  noFooterGap = false,
-} = Astro.props;
+const { title, description, noFooterGap = false, lang = 'es' } = Astro.props;
 const settings = getSettings();
+const strings = t[lang];
+const nombreEvento = (lang === 'eu' && settings.nombreEventoEu) || settings.nombreEvento;
+const enlaceInscripcion = (lang === 'eu' && settings.enlaceInscripcionEu) || settings.enlaceInscripcion;
+const home = lang === 'eu' ? '/eu/' : '/';
 
 const nav = [
-  { href: '/', label: 'Inicio' },
-  { href: '/carrera', label: 'La carrera' },
-  { href: '/dorsales', label: 'Recogida de dorsales' },
-  { href: '/faq', label: 'Preguntas frecuentes' },
+  { href: home, label: strings.nav.inicio },
+  { href: pathWithLang('/carrera', lang), label: strings.nav.carrera },
+  { href: pathWithLang('/dorsales', lang), label: strings.nav.dorsales },
+  { href: pathWithLang('/faq', lang), label: strings.nav.faq },
 ];
+
+const otroIdioma: Lang = lang === 'es' ? 'eu' : 'es';
+const enlaceOtroIdioma = pathWithLang(Astro.url.pathname, otroIdioma);
 
 const orden = { oro: 0, plata: 1, bronce: 2, colaborador: 3 };
 const patrocinadores = (await getCollection('patrocinadores')).sort(
@@ -31,7 +36,7 @@ const contacto = getContacto();
 ---
 
 <!doctype html>
-<html lang="es" style={`--color-primary: ${settings.colorPrimario || '#0b3d5c'}; --color-accent: ${settings.colorAcento || '#d62828'};`}>
+<html lang={lang} style={`--color-primary: ${settings.colorPrimario || '#0b3d5c'}; --color-accent: ${settings.colorAcento || '#d62828'};`}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -43,8 +48,10 @@ const contacto = getContacto();
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Anton&display=swap"
       rel="stylesheet"
     />
-    <title>{title} · {settings.nombreEvento}</title>
-    <meta name="description" content={description} />
+    <title>{title} · {nombreEvento}</title>
+    <meta name="description" content={description || strings.meta.description} />
+    <link rel="alternate" hreflang="es" href={pathWithLang(Astro.url.pathname, 'es')} />
+    <link rel="alternate" hreflang="eu" href={pathWithLang(Astro.url.pathname, 'eu')} />
   </head>
   <body>
     <header class="site-header" id="siteHeader">
@@ -58,18 +65,23 @@ const contacto = getContacto();
                 </li>
               ))}
               <li>
-                <a class="is-cta" href={settings.enlaceInscripcion} target="_blank" rel="noopener">
-                  ¡Inscríbete!
+                <a href={enlaceOtroIdioma} class="lang-switch" aria-label={strings.langSwitch.aria}>
+                  {strings.langSwitch.label}
+                </a>
+              </li>
+              <li>
+                <a class="is-cta" href={enlaceInscripcion} target="_blank" rel="noopener">
+                  {strings.nav.inscribete}
                 </a>
               </li>
             </ul>
           </nav>
         </div>
-        <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="siteNavWrap">
+        <button class="nav-toggle" id="navToggle" aria-label={strings.nav.abrirMenu} aria-expanded="false" aria-controls="siteNavWrap">
           <span></span><span></span><span></span>
         </button>
-        <a href="/" class="site-logo">
-          <img src="/favicon-getxo.png" alt={settings.nombreEvento} />
+        <a href={home} class="site-logo">
+          <img src="/favicon-getxo.png" alt={nombreEvento} />
         </a>
       </div>
     </header>
@@ -80,23 +92,23 @@ const contacto = getContacto();
 
     <footer style={`background: var(--color-primary-dark); color: #fff; margin-top: ${noFooterGap ? '0' : '3rem'};`}>
       <div class="container footer-contact">
-        <h2>Contacto</h2>
+        <h2>{strings.footer.contacto}</h2>
         <div class="footer-contact-grid">
           <div>
             <p>
-              Email<br />
+              {strings.footer.email}<br />
               <a href={`mailto:${contacto.email}`}>{contacto.email}</a>
             </p>
           </div>
           <div>
             <p>
-              Teléfono<br />
+              {strings.footer.telefono}<br />
               {contacto.telefono}
             </p>
           </div>
           <div>
             <p>
-              Dirección<br />
+              {strings.footer.direccion}<br />
               {contacto.direccion}
             </p>
           </div>
@@ -127,7 +139,7 @@ const contacto = getContacto();
         <div class="footer-orgs-grid">
           {patrocinadores.length > 0 && (
             <div class="footer-orgs-col">
-              <p class="footer-orgs-label">Patrocinadores y colaboradores</p>
+              <p class="footer-orgs-label">{strings.footer.patrocinadores}</p>
               <div class="footer-orgs-logos">
                 {patrocinadores.map((p) => {
                   const Wrapper = p.data.url ? 'a' : 'div';
@@ -146,7 +158,7 @@ const contacto = getContacto();
             </div>
           )}
           <div class="footer-orgs-col">
-            <p class="footer-orgs-label">Organizado por</p>
+            <p class="footer-orgs-label">{strings.footer.organizadoPor}</p>
             <div class="footer-orgs-logos">
               <span class="footer-orgs-badge">
                 <img src="/images/getxo_atletismo.jpeg" alt="Club Atlético Getxo" style="height: 44px; width: auto; display: block;" />
@@ -154,7 +166,7 @@ const contacto = getContacto();
             </div>
           </div>
           <div class="footer-orgs-col">
-            <p class="footer-orgs-label">Homologado por</p>
+            <p class="footer-orgs-label">{strings.footer.homologadoPor}</p>
             <div class="footer-orgs-logos">
               <span class="footer-orgs-badge">
                 <img src="/images/rfea.jpeg" alt="RFEA" style="height: 44px; width: auto; display: block;" />
@@ -166,9 +178,9 @@ const contacto = getContacto();
 
       <div class="container" style="padding-top: 2rem; padding-bottom: 1.5rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
         <p style="margin: 0; color: rgba(255,255,255,0.6);">
-          Web desarrollada por <a href="https://belvedere.eus" target="_blank" rel="noopener" style="color: #fff;">Belvedere Agency</a>
+          {strings.footer.desarrolladoPor} <a href="https://belvedere.eus" target="_blank" rel="noopener" style="color: #fff;">Belvedere Agency</a>
         </p>
-        <a href="/legal" style="color: #fff;">Aviso legal y privacidad</a>
+        <a href={pathWithLang('/legal', lang)} style="color: #fff;">{strings.footer.avisoLegal}</a>
       </div>
     </footer>
 
