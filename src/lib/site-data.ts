@@ -16,6 +16,7 @@ export interface Settings {
   enlaceInscripcion: string;
   fechaHoraISO?: string;
   fotoHero?: string;
+  videoHeroUrl?: string;
   colorPrimario?: string;
   colorAcento?: string;
 }
