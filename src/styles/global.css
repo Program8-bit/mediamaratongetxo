@@ -160,6 +160,21 @@ a.card:hover,
   background: var(--color-bg-alt);
 }
 
+/* El iframe del vídeo de fondo lo crea la API de YouTube en tiempo de
+   ejecución, así que esta regla debe ir sin scope de componente para
+   poder aplicarle el tamaño. */
+.hero-video-bg iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 177.78vh;
+  height: 100vh;
+  min-width: 100%;
+  min-height: 56.25vw;
+  transform: translate(-50%, -50%);
+  border: 0;
+}
+
 .eyebrow {
   text-transform: uppercase;
   letter-spacing: 0.1em;
