@@ -40,25 +40,38 @@ const patrocinadores = (await getCollection('patrocinadores')).sort(
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" href="/favicon-getxo.png" type="image/png" />
     <link rel="apple-touch-icon" href="/favicon-getxo.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
     <title>{title} · {settings.nombreEvento}</title>
     <meta name="description" content={description} />
   </head>
   <body>
-    <header style="background: var(--color-primary); color: #fff;">
+    <header class="site-header" id="siteHeader">
       <div class="container site-header-inner">
-        <span class="site-header-spacer"></span>
-        <nav class="site-nav">
-          <ul>
-            {nav.map((item) => (
-              <li>
-                <a href={item.href}>{item.label}</a>
-              </li>
-            ))}
-          </ul>
-        </nav>
-        <a class="btn site-cta" href={settings.enlaceInscripcion} target="_blank" rel="noopener">
-          Inscríbete
+        <a href="/" class="site-logo">
+          <img src="/favicon-getxo.png" alt={settings.nombreEvento} />
         </a>
+        <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="siteNavWrap">
+          <span></span><span></span><span></span>
+        </button>
+        <div class="site-nav-wrap" id="siteNavWrap">
+          <nav class="site-nav">
+            <ul>
+              {nav.map((item) => (
+                <li>
+                  <a href={item.href}>{item.label}</a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <a class="btn site-cta" href={settings.enlaceInscripcion} target="_blank" rel="noopener">
+            Inscríbete
+          </a>
+        </div>
       </div>
     </header>
 
@@ -106,6 +119,31 @@ const patrocinadores = (await getCollection('patrocinadores')).sort(
               document.location.href = '/admin/';
             });
           }
+        });
+      }
+    </script>
+
+    <script>
+      const header = document.getElementById('siteHeader');
+      const toggle = document.getElementById('navToggle');
+
+      if (header && toggle) {
+        const closeMenu = () => {
+          header.classList.remove('is-open');
+          toggle.setAttribute('aria-expanded', 'false');
+        };
+
+        toggle.addEventListener('click', () => {
+          const isOpen = header.classList.toggle('is-open');
+          toggle.setAttribute('aria-expanded', String(isOpen));
+        });
+
+        header.querySelectorAll('.site-nav a, .site-cta').forEach((link) => {
+          link.addEventListener('click', closeMenu);
+        });
+
+        window.addEventListener('resize', () => {
+          if (window.innerWidth > 860) closeMenu();
         });
       }
     </script>
