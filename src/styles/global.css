@@ -258,6 +258,17 @@ a.card:hover,
   display: block;
 }
 
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+.lang-switch-mobile {
+  display: none;
+}
+
 .nav-toggle {
   display: none;
   flex-direction: column;
@@ -354,11 +365,12 @@ a.card:hover,
 }
 
 @media (max-width: 860px) {
-  .site-nav a.lang-switch {
-    display: inline-block;
-    border-radius: 0;
-    border: none;
-    padding: 0.85rem 1.5rem;
+  .lang-switch-item {
+    display: none;
+  }
+
+  .lang-switch-mobile {
+    display: inline-flex;
   }
 }
 

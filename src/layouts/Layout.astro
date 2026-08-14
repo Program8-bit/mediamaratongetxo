@@ -64,7 +64,7 @@ const contacto = getContacto();
                   <a href={item.href}>{item.label}</a>
                 </li>
               ))}
-              <li>
+              <li class="lang-switch-item">
                 <a href={enlaceOtroIdioma} class="lang-switch" aria-label={strings.langSwitch.aria}>
                   {strings.langSwitch.label}
                 </a>
@@ -77,9 +77,14 @@ const contacto = getContacto();
             </ul>
           </nav>
         </div>
-        <button class="nav-toggle" id="navToggle" aria-label={strings.nav.abrirMenu} aria-expanded="false" aria-controls="siteNavWrap">
-          <span></span><span></span><span></span>
-        </button>
+        <div class="header-actions">
+          <a href={enlaceOtroIdioma} class="lang-switch lang-switch-mobile" aria-label={strings.langSwitch.aria}>
+            {strings.langSwitch.label}
+          </a>
+          <button class="nav-toggle" id="navToggle" aria-label={strings.nav.abrirMenu} aria-expanded="false" aria-controls="siteNavWrap">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
         <a href={home} class="site-logo">
           <img src="/favicon-getxo.png" alt={nombreEvento} />
         </a>
