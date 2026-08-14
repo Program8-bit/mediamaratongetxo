@@ -6,25 +6,38 @@ const carrera = getCarrera();
 ---
 
 <Layout title="La carrera">
-  <section class="section">
+  <section class="page-hero">
     <div class="container">
-      <h1>La carrera</h1>
-      <p><strong>Distancia:</strong> {carrera.distancia}</p>
+      <h1 class="page-hero-title">
+        <span>La</span>
+        <span>carrera</span>
+      </h1>
+    </div>
+  </section>
 
-      <h2>Recorrido</h2>
-      <p style="white-space: pre-line;">{carrera.recorrido}</p>
-      {carrera.mapaUrl && (
-        <p><a href={carrera.mapaUrl} target="_blank" rel="noopener">Ver mapa del recorrido →</a></p>
-      )}
-
-      <h2>Altimetría</h2>
-      <p style="white-space: pre-line;">{carrera.altimetria}</p>
-
-      <h2>Horarios</h2>
-      <p style="white-space: pre-line;">{carrera.horarios}</p>
-
-      <h2>Categorías</h2>
-      <p style="white-space: pre-line;">{carrera.categorias}</p>
+  <section class="page-section section">
+    <div class="container">
+      <div class="info-grid">
+        <div class="info-card">
+          <h2>Recorrido</h2>
+          <p style="white-space: pre-line;">{carrera.recorrido}</p>
+          {carrera.mapaUrl && (
+            <p><a href={carrera.mapaUrl} target="_blank" rel="noopener">Ver mapa del recorrido →</a></p>
+          )}
+        </div>
+        <div class="info-card">
+          <h2>Altimetría</h2>
+          <p style="white-space: pre-line;">{carrera.altimetria}</p>
+        </div>
+        <div class="info-card">
+          <h2>Horarios</h2>
+          <p style="white-space: pre-line;">{carrera.horarios}</p>
+        </div>
+        <div class="info-card">
+          <h2>Categorías</h2>
+          <p style="white-space: pre-line;">{carrera.categorias}</p>
+        </div>
+      </div>
     </div>
   </section>
 </Layout>

@@ -6,19 +6,32 @@ const dorsales = getDorsales();
 ---
 
 <Layout title="Recogida de dorsales">
-  <section class="section">
+  <section class="page-hero">
     <div class="container">
-      <h1>Recogida de dorsales</h1>
-      <div class="card">
-        <p><strong>Lugar:</strong> {dorsales.lugar}</p>
-        <p><strong>Fecha:</strong> {dorsales.fecha}</p>
-        <p style="white-space: pre-line; margin-bottom: 0;"><strong>Horario:</strong>{'\n'}{dorsales.horario}</p>
+      <h1 class="page-hero-title">
+        <span>Recogida de</span>
+        <span>dorsales</span>
+      </h1>
+    </div>
+  </section>
+
+  <section class="page-section section">
+    <div class="container">
+      <div class="info-grid">
+        <div class="info-card">
+          <h2>Cuándo y dónde</h2>
+          <p><strong>Lugar:</strong> {dorsales.lugar}</p>
+          <p><strong>Fecha:</strong> {dorsales.fecha}</p>
+          <p style="white-space: pre-line;"><strong>Horario:</strong>{'\n'}{dorsales.horario}</p>
+          {dorsales.aviso && (
+            <p style="color: var(--color-text-muted); white-space: pre-line;">{dorsales.aviso}</p>
+          )}
+        </div>
+        <div class="info-card">
+          <h2>Qué llevar</h2>
+          <p style="white-space: pre-line;">{dorsales.queLlevar}</p>
+        </div>
       </div>
-      {dorsales.aviso && (
-        <p style="color: var(--color-text-muted); white-space: pre-line;">{dorsales.aviso}</p>
-      )}
-      <h2>Qué llevar</h2>
-      <p style="white-space: pre-line;">{dorsales.queLlevar}</p>
     </div>
   </section>
 </Layout>

@@ -110,7 +110,7 @@ collections:
     extension: "yaml"
     fields:
       - { label: "Pregunta", name: "pregunta", widget: "string" }
-      - { label: "Respuesta", name: "respuesta", widget: "text" }
+      - { label: "Respuesta", name: "respuesta", widget: "text", hint: "Para un enlace con texto personalizado usa el formato [texto del enlace](https://...)" }
       - { label: "Orden", name: "orden", widget: "number", default: 0 }
 
   - name: "reglamento"

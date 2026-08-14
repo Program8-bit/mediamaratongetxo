@@ -19,10 +19,8 @@ const settings = getSettings();
 const nav = [
   { href: '/', label: 'Inicio' },
   { href: '/carrera', label: 'La carrera' },
-  { href: '/resultados', label: 'Resultados' },
   { href: '/dorsales', label: 'Recogida de dorsales' },
-  { href: '/faq', label: 'FAQ' },
-  { href: '/reglamento', label: 'Reglamento' },
+  { href: '/faq', label: 'Preguntas frecuentes' },
 ];
 
 const orden = { oro: 0, plata: 1, bronce: 2, colaborador: 3 };
@@ -89,54 +87,83 @@ const contacto = getContacto();
               Email<br />
               <a href={`mailto:${contacto.email}`}>{contacto.email}</a>
             </p>
-            {contacto.instagram && (
-              <p>
-                Instagram<br />
-                <a href={contacto.instagram} target="_blank" rel="noopener">Instagram</a>
-              </p>
-            )}
-            {contacto.facebook && (
-              <p>
-                Facebook<br />
-                <a href={contacto.facebook} target="_blank" rel="noopener">Facebook</a>
-              </p>
-            )}
           </div>
           <div>
             <p>
               Teléfono<br />
               {contacto.telefono}
             </p>
+          </div>
+          <div>
             <p>
               Dirección<br />
               {contacto.direccion}
             </p>
           </div>
         </div>
+        {(contacto.instagram || contacto.facebook) && (
+          <div class="footer-social">
+            {contacto.instagram && (
+              <a href={contacto.instagram} target="_blank" rel="noopener" aria-label="Instagram" class="footer-social-link">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="2" y="2" width="20" height="20" rx="5" />
+                  <circle cx="12" cy="12" r="4.2" />
+                  <circle cx="17.4" cy="6.6" r="1.15" fill="currentColor" stroke="none" />
+                </svg>
+              </a>
+            )}
+            {contacto.facebook && (
+              <a href={contacto.facebook} target="_blank" rel="noopener" aria-label="Facebook" class="footer-social-link">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M15 8.5h2.5V5H15c-2.2 0-4 1.8-4 4v2H9v3.5h2V19h3.5v-4.5H17l.5-3.5h-3V9c0-.55.45-1 1-1z" />
+                </svg>
+              </a>
+            )}
+          </div>
+        )}
       </div>
 
-      {patrocinadores.length > 0 && (
-        <div class="container" style="padding-top: 2rem; text-align: center;">
-          <p style="margin: 0 0 1rem; text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.8rem; font-weight: 700; color: rgba(255,255,255,0.6);">
-            Patrocinadores y colaboradores
-          </p>
-          <div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 1.25rem;">
-            {patrocinadores.map((p) => {
-              const Wrapper = p.data.url ? 'a' : 'div';
-              return (
-                <Wrapper
-                  href={p.data.url}
-                  target={p.data.url ? '_blank' : undefined}
-                  rel={p.data.url ? 'noopener' : undefined}
-                  style="background: #fff; border-radius: var(--radius); padding: 0.6rem 1rem; display: inline-flex; align-items: center;"
-                >
-                  <img src={p.data.logo} alt={p.data.nombre} style="max-height: 40px; max-width: 120px;" />
-                </Wrapper>
-              );
-            })}
+      <div class="container footer-orgs">
+        <div class="footer-orgs-grid">
+          {patrocinadores.length > 0 && (
+            <div class="footer-orgs-col">
+              <p class="footer-orgs-label">Patrocinadores y colaboradores</p>
+              <div class="footer-orgs-logos">
+                {patrocinadores.map((p) => {
+                  const Wrapper = p.data.url ? 'a' : 'div';
+                  return (
+                    <Wrapper
+                      href={p.data.url}
+                      target={p.data.url ? '_blank' : undefined}
+                      rel={p.data.url ? 'noopener' : undefined}
+                      class="footer-orgs-badge"
+                    >
+                      <img src={p.data.logo} alt={p.data.nombre} style="max-height: 40px; max-width: 120px;" />
+                    </Wrapper>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+          <div class="footer-orgs-col">
+            <p class="footer-orgs-label">Organizado por</p>
+            <div class="footer-orgs-logos">
+              <span class="footer-orgs-badge">
+                <img src="/images/getxo_atletismo.jpeg" alt="Club Atlético Getxo" style="height: 44px; width: auto; display: block;" />
+              </span>
+            </div>
+          </div>
+          <div class="footer-orgs-col">
+            <p class="footer-orgs-label">Homologado por</p>
+            <div class="footer-orgs-logos">
+              <span class="footer-orgs-badge">
+                <img src="/images/rfea.jpeg" alt="RFEA" style="height: 44px; width: auto; display: block;" />
+              </span>
+            </div>
           </div>
         </div>
-      )}
+      </div>
+
       <div class="container" style="padding-top: 2rem; padding-bottom: 1.5rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
         <p style="margin: 0; color: rgba(255,255,255,0.6);">
           Web desarrollada por <a href="https://belvedere.eus" target="_blank" rel="noopener" style="color: #fff;">Belvedere Agency</a>
