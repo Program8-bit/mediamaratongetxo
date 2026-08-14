@@ -349,17 +349,19 @@ a.card:hover,
   color: color-mix(in srgb, var(--color-accent) 70%, white);
 }
 
-.site-nav a.lang-switch {
+.lang-switch {
   display: inline-flex;
   align-items: center;
+  color: rgba(255, 255, 255, 0.85);
   border: 1px solid rgba(255, 255, 255, 0.35);
   border-radius: 999px;
   padding: 0.3rem 0.8rem;
   font-size: 0.82rem;
   font-weight: 600;
+  text-decoration: none;
 }
 
-.site-nav a.lang-switch:hover {
+.lang-switch:hover {
   border-color: #fff;
   color: #fff;
 }
