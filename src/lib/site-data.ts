@@ -15,6 +15,7 @@ export interface Settings {
   subtitulo: string;
   enlaceInscripcion: string;
   fechaHoraISO?: string;
+  fotoHero?: string;
   colorPrimario?: string;
   colorAcento?: string;
 }

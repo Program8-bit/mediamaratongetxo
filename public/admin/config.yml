@@ -27,6 +27,7 @@ collections:
           - { label: "Subtítulo (portada)", name: "subtitulo", widget: "text" }
           - { label: "Enlace a inscripciones", name: "enlaceInscripcion", widget: "string" }
           - { label: "Fecha y hora de salida (para la cuenta atrás)", name: "fechaHoraISO", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ssZ", picker_utc: false }
+          - { label: "Foto de fondo (portada)", name: "fotoHero", widget: "image", required: false, hint: "Foto para el fondo del hero de Inicio. Si no se sube ninguna, se queda en negro liso." }
           - { label: "Color principal", name: "colorPrimario", widget: "color", default: "#0a0a0a" }
           - { label: "Color de acento", name: "colorAcento", widget: "color", default: "#f05631" }
 

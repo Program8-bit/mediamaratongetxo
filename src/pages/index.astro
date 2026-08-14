@@ -8,7 +8,12 @@ const palabras = settings.nombreEvento.split(' ');
 ---
 
 <Layout title="Inicio" noFooterGap>
-  <section class="hero-black">
+  <section
+    class="hero-black"
+    style={settings.fotoHero
+      ? `background-image: linear-gradient(180deg, rgba(0,0,0,0.55), rgba(0,0,0,0.75)), url(${settings.fotoHero});`
+      : undefined}
+  >
     <div class="container">
       <h1 class="hero-title">
         {palabras.map((palabra) => (
@@ -67,7 +72,9 @@ const palabras = settings.nombreEvento.split(' ');
 
 <style>
   .hero-black {
-    background: var(--color-primary);
+    background-color: var(--color-primary);
+    background-size: cover;
+    background-position: center;
     color: #fff;
     padding: 5rem 0 3.5rem;
   }
