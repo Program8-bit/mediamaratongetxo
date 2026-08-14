@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-import { getSettings } from '../lib/site-data';
+import { getSettings, getContacto } from '../lib/site-data';
 import { getCollection } from 'astro:content';
 
 interface Props {
@@ -21,16 +21,15 @@ const nav = [
   { href: '/carrera', label: 'La carrera' },
   { href: '/resultados', label: 'Resultados' },
   { href: '/dorsales', label: 'Recogida de dorsales' },
-  { href: '/galeria', label: 'Galería' },
   { href: '/faq', label: 'FAQ' },
   { href: '/reglamento', label: 'Reglamento' },
-  { href: '/contacto', label: 'Contacto' },
 ];
 
 const orden = { oro: 0, plata: 1, bronce: 2, colaborador: 3 };
 const patrocinadores = (await getCollection('patrocinadores')).sort(
   (a, b) => orden[a.data.nivel] - orden[b.data.nivel]
 );
+const contacto = getContacto();
 ---
 
 <!doctype html>
@@ -52,12 +51,6 @@ const patrocinadores = (await getCollection('patrocinadores')).sort(
   <body>
     <header class="site-header" id="siteHeader">
       <div class="container site-header-inner">
-        <a href="/" class="site-logo">
-          <img src="/favicon-getxo.png" alt={settings.nombreEvento} />
-        </a>
-        <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="siteNavWrap">
-          <span></span><span></span><span></span>
-        </button>
         <div class="site-nav-wrap" id="siteNavWrap">
           <nav class="site-nav">
             <ul>
@@ -74,6 +67,12 @@ const patrocinadores = (await getCollection('patrocinadores')).sort(
             </ul>
           </nav>
         </div>
+        <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="siteNavWrap">
+          <span></span><span></span><span></span>
+        </button>
+        <a href="/" class="site-logo">
+          <img src="/favicon-getxo.png" alt={settings.nombreEvento} />
+        </a>
       </div>
     </header>
 
@@ -82,6 +81,40 @@ const patrocinadores = (await getCollection('patrocinadores')).sort(
     </main>
 
     <footer style={`background: var(--color-primary-dark); color: #fff; margin-top: ${noFooterGap ? '0' : '3rem'};`}>
+      <div class="container footer-contact">
+        <h2>Contacto</h2>
+        <div class="footer-contact-grid">
+          <div>
+            <p>
+              Email<br />
+              <a href={`mailto:${contacto.email}`}>{contacto.email}</a>
+            </p>
+            {contacto.instagram && (
+              <p>
+                Instagram<br />
+                <a href={contacto.instagram} target="_blank" rel="noopener">Instagram</a>
+              </p>
+            )}
+            {contacto.facebook && (
+              <p>
+                Facebook<br />
+                <a href={contacto.facebook} target="_blank" rel="noopener">Facebook</a>
+              </p>
+            )}
+          </div>
+          <div>
+            <p>
+              Teléfono<br />
+              {contacto.telefono}
+            </p>
+            <p>
+              Dirección<br />
+              {contacto.direccion}
+            </p>
+          </div>
+        </div>
+      </div>
+
       {patrocinadores.length > 0 && (
         <div class="container" style="padding-top: 2rem; text-align: center;">
           <p style="margin: 0 0 1rem; text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.8rem; font-weight: 700; color: rgba(255,255,255,0.6);">
