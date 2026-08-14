@@ -27,15 +27,6 @@ const reglamento = defineCollection({
   }),
 });
 
-const galeria = defineCollection({
-  loader: glob({ pattern: '**/*.yaml', base: 'src/content/galeria' }),
-  schema: z.object({
-    imagen: z.string(),
-    alt: z.string(),
-    anio: z.string(),
-  }),
-});
-
 const legal = defineCollection({
   loader: glob({ pattern: '**/*.md', base: 'src/content/legal' }),
   schema: z.object({
@@ -47,6 +38,5 @@ export const collections = {
   patrocinadores,
   faq,
   reglamento,
-  galeria,
   legal,
 };

@@ -111,18 +111,6 @@ collections:
       - { label: "Respuesta", name: "respuesta", widget: "text" }
       - { label: "Orden", name: "orden", widget: "number", default: 0 }
 
-  - name: "galeria"
-    label: "Galería"
-    folder: "src/content/galeria"
-    create: true
-    slug: "{{slug}}"
-    identifier_field: "alt"
-    extension: "yaml"
-    fields:
-      - { label: "Imagen", name: "imagen", widget: "image" }
-      - { label: "Texto alternativo", name: "alt", widget: "string" }
-      - { label: "Año", name: "anio", widget: "string" }
-
   - name: "reglamento"
     label: "Reglamento"
     folder: "src/content/reglamento"
