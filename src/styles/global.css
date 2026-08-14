@@ -248,9 +248,17 @@ a.card:hover,
   list-style: none;
   display: flex;
   flex-wrap: wrap;
-  gap: 1.5rem;
+  gap: 0;
   margin: 0;
   padding: 0;
+}
+
+@media (min-width: 861px) {
+  .site-nav li:not(:first-child) {
+    border-left: 1px solid rgba(255, 255, 255, 0.25);
+    margin-left: 1.5rem;
+    padding-left: 1.5rem;
+  }
 }
 
 .site-nav a {
