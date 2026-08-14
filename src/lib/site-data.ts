@@ -14,6 +14,7 @@ export interface Settings {
   horaSalida: string;
   subtitulo: string;
   enlaceInscripcion: string;
+  fechaHoraISO?: string;
   colorPrimario?: string;
   colorAcento?: string;
 }

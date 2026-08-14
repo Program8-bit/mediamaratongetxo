@@ -1,28 +1,28 @@
 :root {
   /* Valores por defecto: se sobrescriben desde /admin (Configuración general) */
-  --color-primary: #0b3d5c;
-  --color-accent: #d62828;
+  --color-primary: #0a0a0a;
+  --color-accent: #f05631;
 
   /* Tonos derivados automáticamente de los dos de arriba */
-  --color-primary-dark: color-mix(in srgb, var(--color-primary) 80%, black);
+  --color-primary-dark: color-mix(in srgb, var(--color-primary) 85%, black);
   --color-primary-light: color-mix(in srgb, var(--color-primary) 55%, white);
   --color-accent-dark: color-mix(in srgb, var(--color-accent) 80%, black);
 
   --color-bg: #ffffff;
-  --color-bg-alt: #f5f7f8;
-  --color-text: #1a1d1e;
-  --color-text-muted: #5b6467;
-  --color-border: #e2e6e8;
+  --color-bg-alt: #f4f3f1;
+  --color-text: #14161a;
+  --color-text-muted: #5c6165;
+  --color-border: #e4e2de;
 
-  --radius: 12px;
-  --radius-sm: 8px;
-  --max-width: 1120px;
+  --radius: 10px;
+  --radius-sm: 6px;
+  --max-width: 1160px;
   --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --font-display: "Poppins", var(--font-sans);
+  --font-display: "Anton", var(--font-sans);
 
-  --shadow-sm: 0 1px 2px rgba(15, 23, 25, 0.06), 0 1px 1px rgba(15, 23, 25, 0.04);
-  --shadow-md: 0 6px 16px rgba(15, 23, 25, 0.08), 0 2px 6px rgba(15, 23, 25, 0.06);
-  --shadow-lg: 0 20px 40px rgba(15, 23, 25, 0.14);
+  --shadow-sm: 0 1px 2px rgba(10, 10, 10, 0.08);
+  --shadow-md: 0 10px 24px rgba(10, 10, 10, 0.14);
+  --shadow-lg: 0 24px 48px rgba(10, 10, 10, 0.22);
 
   --ease: cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -54,8 +54,14 @@ main {
   flex: 1;
 }
 
+main p a,
+.card p a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
 a {
-  color: var(--color-primary);
+  color: var(--color-text);
   transition: color 0.15s var(--ease);
 }
 
@@ -73,14 +79,11 @@ h1,
 h2,
 h3 {
   font-family: var(--font-display);
-  color: var(--color-primary-dark);
-  line-height: 1.15;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-}
-
-h1 {
-  font-weight: 700;
+  color: var(--color-text);
+  line-height: 1.05;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
 }
 
 .container {
@@ -95,9 +98,9 @@ h1 {
   gap: 0.5rem;
   background: var(--color-accent);
   color: #fff;
-  padding: 0.75rem 1.6rem;
-  border-radius: 999px;
-  font-weight: 600;
+  padding: 0.85rem 1.75rem;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
   text-decoration: none;
   box-shadow: var(--shadow-sm);
   transition: background 0.15s var(--ease), transform 0.15s var(--ease), box-shadow 0.15s var(--ease);
@@ -120,10 +123,10 @@ h1 {
   gap: 0.5rem;
   background: transparent;
   color: #fff;
-  border: 2px solid rgba(255, 255, 255, 0.7);
-  padding: 0.65rem 1.4rem;
-  border-radius: 999px;
-  font-weight: 600;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  padding: 0.75rem 1.6rem;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
   text-decoration: none;
   transition: background 0.15s var(--ease), color 0.15s var(--ease), border-color 0.15s var(--ease);
 }
@@ -146,7 +149,7 @@ a.card:hover,
 .card.is-interactive:hover {
   transform: translateY(-3px);
   box-shadow: var(--shadow-md);
-  border-color: color-mix(in srgb, var(--color-primary) 25%, var(--color-border));
+  border-color: color-mix(in srgb, var(--color-accent) 30%, var(--color-border));
 }
 
 .section {
@@ -159,9 +162,9 @@ a.card:hover,
 
 .eyebrow {
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-size: 0.8rem;
-  font-weight: 600;
+  letter-spacing: 0.1em;
+  font-size: 0.78rem;
+  font-weight: 700;
   color: var(--color-accent);
 }
 
@@ -173,15 +176,14 @@ a.card:hover,
   position: sticky;
   top: 0;
   z-index: 40;
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 .site-header-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-top: 0.9rem;
-  padding-bottom: 0.9rem;
+  padding-top: 0.7rem;
+  padding-bottom: 0.7rem;
   gap: 1rem;
 }
 
@@ -191,15 +193,11 @@ a.card:hover,
   gap: 0.65rem;
   color: #fff;
   text-decoration: none;
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 1.05rem;
-  white-space: nowrap;
   flex-shrink: 0;
 }
 
 .site-logo img {
-  height: 38px;
+  height: 30px;
   width: auto;
   display: block;
 }
@@ -210,8 +208,8 @@ a.card:hover,
   justify-content: center;
   align-items: center;
   gap: 5px;
-  width: 42px;
-  height: 42px;
+  width: 40px;
+  height: 40px;
   background: rgba(255, 255, 255, 0.08);
   border: none;
   border-radius: var(--radius-sm);
@@ -221,7 +219,7 @@ a.card:hover,
 
 .nav-toggle span {
   display: block;
-  width: 20px;
+  width: 18px;
   height: 2px;
   background: #fff;
   border-radius: 2px;
@@ -256,9 +254,9 @@ a.card:hover,
 }
 
 .site-nav a {
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(255, 255, 255, 0.85);
   text-decoration: none;
-  font-size: 0.97rem;
+  font-size: 0.9rem;
   font-weight: 500;
   white-space: nowrap;
 }
@@ -267,8 +265,13 @@ a.card:hover,
   color: #fff;
 }
 
-.site-cta {
-  flex-shrink: 0;
+.site-nav a.is-cta {
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
+.site-nav a.is-cta:hover {
+  color: color-mix(in srgb, var(--color-accent) 70%, white);
 }
 
 @media (max-width: 860px) {
@@ -309,10 +312,64 @@ a.card:hover,
   .site-nav li + li a {
     border-top: 1px solid rgba(255, 255, 255, 0.08);
   }
+}
 
-  .site-cta {
-    margin: 0.75rem 1.5rem 1.25rem;
-    justify-content: center;
-    text-align: center;
+/* ---------- Countdown ---------- */
+
+.countdown-bar {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+.countdown-bar-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.1rem 0;
+}
+
+.countdown-date {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-weight: 400;
+  font-size: clamp(1.4rem, 3vw, 2rem);
+}
+
+.countdown-clock {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.countdown-unit {
+  text-align: center;
+}
+
+.countdown-unit strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.countdown-unit span {
+  display: block;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.9;
+  margin-top: 0.25rem;
+}
+
+@media (max-width: 640px) {
+  .countdown-clock {
+    gap: 1rem;
+  }
+
+  .countdown-unit strong {
+    font-size: 1.25rem;
   }
 }

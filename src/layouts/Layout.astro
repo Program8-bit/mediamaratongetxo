@@ -43,7 +43,7 @@ const patrocinadores = (await getCollection('patrocinadores')).sort(
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Anton&display=swap"
       rel="stylesheet"
     />
     <title>{title} · {settings.nombreEvento}</title>
@@ -66,11 +66,13 @@ const patrocinadores = (await getCollection('patrocinadores')).sort(
                   <a href={item.href}>{item.label}</a>
                 </li>
               ))}
+              <li>
+                <a class="is-cta" href={settings.enlaceInscripcion} target="_blank" rel="noopener">
+                  ¡Inscríbete!
+                </a>
+              </li>
             </ul>
           </nav>
-          <a class="btn site-cta" href={settings.enlaceInscripcion} target="_blank" rel="noopener">
-            Inscríbete
-          </a>
         </div>
       </div>
     </header>
@@ -82,7 +84,7 @@ const patrocinadores = (await getCollection('patrocinadores')).sort(
     <footer style={`background: var(--color-primary-dark); color: #fff; margin-top: ${noFooterGap ? '0' : '3rem'};`}>
       {patrocinadores.length > 0 && (
         <div class="container" style="padding-top: 2rem; text-align: center;">
-          <p style="margin: 0 0 1rem; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.85rem; color: #c9d3db;">
+          <p style="margin: 0 0 1rem; text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.8rem; font-weight: 700; color: rgba(255,255,255,0.6);">
             Patrocinadores y colaboradores
           </p>
           <div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 1.25rem;">
@@ -103,7 +105,7 @@ const patrocinadores = (await getCollection('patrocinadores')).sort(
         </div>
       )}
       <div class="container" style="padding-top: 2rem; padding-bottom: 1.5rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
-        <p style="margin: 0; color: #c9d3db;">
+        <p style="margin: 0; color: rgba(255,255,255,0.6);">
           Web desarrollada por <a href="https://belvedere.eus" target="_blank" rel="noopener" style="color: #fff;">Belvedere Agency</a>
         </p>
         <a href="/legal" style="color: #fff;">Aviso legal y privacidad</a>
@@ -138,7 +140,7 @@ const patrocinadores = (await getCollection('patrocinadores')).sort(
           toggle.setAttribute('aria-expanded', String(isOpen));
         });
 
-        header.querySelectorAll('.site-nav a, .site-cta').forEach((link) => {
+        header.querySelectorAll('.site-nav a').forEach((link) => {
           link.addEventListener('click', closeMenu);
         });
 

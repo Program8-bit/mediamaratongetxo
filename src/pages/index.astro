@@ -1,26 +1,184 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { getSettings } from '../lib/site-data';
+import { getSettings, getCarrera } from '../lib/site-data';
 
 const settings = getSettings();
+const carrera = getCarrera();
+const palabras = settings.nombreEvento.split(' ');
 ---
 
 <Layout title="Inicio" noFooterGap>
-  <section style="flex: 1; display: flex; align-items: center; background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark)); color: #fff;">
-    <div class="container" style="padding: 5.5rem 1.25rem; text-align: center;">
-      <img
-        src="/images/logo-otso.jpg"
-        alt={settings.nombreEvento}
-        style="height: 150px; width: auto; border-radius: 14px; box-shadow: 0 8px 24px rgba(0,0,0,0.35); margin-bottom: 2rem;"
-      />
-      <h1 style="color: #fff; font-size: 3.5rem; margin-bottom: 0.75rem;">{settings.nombreEvento}</h1>
-      <p style="font-size: 1.6rem; margin-bottom: 1.75rem;">{settings.subtitulo}</p>
-      <p style="font-size: 1.3rem; margin-bottom: 2.25rem;">
-        📅 {settings.fecha} · 📍 {settings.lugarSalida} · 🕒 {settings.horaSalida}
-      </p>
-      <a class="btn" href={settings.enlaceInscripcion} target="_blank" rel="noopener" style="font-size: 1.2rem; padding: 1rem 2.25rem;">
+  <section class="hero-black">
+    <div class="container">
+      <h1 class="hero-title">
+        {palabras.map((palabra) => (
+          <span>{palabra}</span>
+        ))}
+      </h1>
+      <p class="hero-distances">{carrera.distancia}</p>
+    </div>
+  </section>
+
+  <section class="countdown-bar">
+    <div class="container countdown-bar-inner">
+      <p class="countdown-date">{settings.fecha}</p>
+      <div class="countdown-clock" id="countdown">
+        <div class="countdown-unit">
+          <strong id="cd-days">–</strong>
+          <span>Días</span>
+        </div>
+        <div class="countdown-unit">
+          <strong id="cd-hours">–</strong>
+          <span>Horas</span>
+        </div>
+        <div class="countdown-unit">
+          <strong id="cd-minutes">–</strong>
+          <span>Minutos</span>
+        </div>
+        <div class="countdown-unit">
+          <strong id="cd-seconds">–</strong>
+          <span>Segundos</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container teaser-grid">
+      <div class="teaser-logo-panel">
+        <img src="/favicon-getxo.png" alt="" />
+      </div>
+      <div class="teaser-copy">
+        <p class="eyebrow">La carrera</p>
+        <h2>El recorrido</h2>
+        <p>{carrera.recorrido}</p>
+        {carrera.mapaUrl && (
+          <a class="btn" href={carrera.mapaUrl} target="_blank" rel="noopener">
+            Ver el recorrido
+          </a>
+        )}
+      </div>
+    </div>
+  </section>
+
+  <section class="statement-black">
+    <div class="container">
+      <p class="statement-text">{settings.subtitulo}</p>
+      <a class="btn" href={settings.enlaceInscripcion} target="_blank" rel="noopener">
         Inscríbete
       </a>
     </div>
   </section>
 </Layout>
+
+<style>
+  .hero-black {
+    background: var(--color-primary);
+    color: #fff;
+    padding: 5rem 0 3.5rem;
+  }
+
+  .hero-title {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    color: #fff;
+    font-size: clamp(2.75rem, 9vw, 6rem);
+    line-height: 0.92;
+  }
+
+  .hero-distances {
+    margin: 1.5rem 0 0;
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 1rem;
+    max-width: 34rem;
+  }
+
+  .countdown-bar-inner {
+    flex-wrap: wrap;
+  }
+
+  .teaser-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr);
+    gap: 2.5rem;
+    align-items: center;
+  }
+
+  .teaser-logo-panel {
+    background: var(--color-primary);
+    border-radius: var(--radius);
+    aspect-ratio: 4 / 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2.5rem;
+  }
+
+  .teaser-logo-panel img {
+    max-width: 70%;
+    height: auto;
+  }
+
+  .teaser-copy p {
+    color: var(--color-text-muted);
+    white-space: pre-line;
+  }
+
+  .statement-black {
+    background: var(--color-primary);
+    color: #fff;
+    padding: 4.5rem 0;
+  }
+
+  .statement-text {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    font-size: clamp(1.5rem, 3.4vw, 2.4rem);
+    line-height: 1.15;
+    max-width: 42rem;
+    margin: 0 0 2rem;
+    text-wrap: balance;
+  }
+
+  @media (max-width: 780px) {
+    .teaser-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .teaser-logo-panel {
+      aspect-ratio: 16 / 9;
+    }
+  }
+</style>
+
+<script define:vars={{ targetISO: settings.fechaHoraISO }}>
+  function tick() {
+    const els = {
+      d: document.getElementById('cd-days'),
+      h: document.getElementById('cd-hours'),
+      m: document.getElementById('cd-minutes'),
+      s: document.getElementById('cd-seconds'),
+    };
+    if (!targetISO || !els.d) return;
+
+    const diff = new Date(targetISO).getTime() - Date.now();
+    if (diff <= 0) {
+      els.d.textContent = '0';
+      els.h.textContent = '0';
+      els.m.textContent = '0';
+      els.s.textContent = '0';
+      return;
+    }
+
+    const pad = (n) => String(n).padStart(2, '0');
+    const totalSeconds = Math.floor(diff / 1000);
+    els.d.textContent = String(Math.floor(totalSeconds / 86400));
+    els.h.textContent = pad(Math.floor((totalSeconds % 86400) / 3600));
+    els.m.textContent = pad(Math.floor((totalSeconds % 3600) / 60));
+    els.s.textContent = pad(totalSeconds % 60);
+  }
+
+  tick();
+  setInterval(tick, 1000);
+</script>
